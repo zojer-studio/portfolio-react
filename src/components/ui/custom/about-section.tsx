@@ -94,10 +94,15 @@ const AboutSection: React.FC<AboutSectionProps> = () => {
                 <FontAwesomeIcon icon={faMapPin} />
                 <span className="font-500">Seattle, WA</span>
               </div> */}
-              <div className="bg-background flex flex-col gap-2">
-                <p>Hi! I&apos;m <strong>David</strong>, and I love to tinker.</p>
-                <p>My niche is in <strong>extended reality (XR) prototyping</strong>, which brings together my design and programming skillsets.</p>
-                <p>I&apos;m particularly excited about gestural interactions—i.e., designing for a future without traditional controllers.</p>
+              <div className="bg-background flex flex-col gap-3">
+                <p>I design both interfaces and code.</p>
+                <p>I consider myself, first-and-foremost, a designer. I graduated from the University of Washington's prestigious Interaction Design program in 2024, where I ultimately focused on sharpening my design process. This involved extensive user research—both academically, and professionally.</p>
+                <p>But historically, I've spent a lot of time developing. I have extensive experience in frontend technologies. My bread-and-butter is Next.js and TailwindCSS, which I have been practicing since 2020. Recently, I've developed proficiency in Rust (backend) and Swift (iOS). I've also worked with 3D technologies: namely, prototyping with extended reality (XR) in C# (Unity + Meta's XR SDK). My niche in XR focuses on hand/gestural interactions—i.e., designing for a future without traditional controllers.</p>
+                <p>When I was in high school, I was introduced to computer science, and later on, "Special Topics" — a class dedicated to data structures and algorithms (taught by Microsoft TEALS). Programming came very naturally to me, and my teachers were extremely effective at helping us build a deep gnosis for efficent computing. This set a strong technical foundation for "left brain" activity (in other words, engineering).</p>
+                <p>But after being denied to UW's (very competitive) CSE program, I found myself forced to engage with my "right brain". In this, I've come to understand that design is the intersection between art and engineering—and this blend guides everything I do. My calling is to build products for end-users, and this entails picking up any hard skill that serves that end.</p>
+                <p>I believe my greatest strength is that I do for the sake of doing—and in trying to do the best I can, I've developed a strong sense for where my energy is most valuable. This means walking the line of expansion and contraction; confidence is knowing what you don't know, and I walk the line well. I seek out information when it's needed, and shift my focus to action once I've accumulated enough. (e.g. knowing when I need to do user research, and when I've learned enough.)</p>
+
+                {/* <p>Currently, my weakest link is that I'm not great at selling things. I'm more interested in letting my contributions speak for themselves. That being said, in my last role I </p> */}
               </div>
 
               
