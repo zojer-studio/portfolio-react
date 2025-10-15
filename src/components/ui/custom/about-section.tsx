@@ -43,7 +43,7 @@ const AboutSection: React.FC<AboutSectionProps> = () => {
               </Button>
             :
               <Button variant="primary" onClick={() => setContactView(!contactView)}>
-                About
+                Contact
                 <Minus className="ml-2 w-4 h-4" />
               </Button>
             }
