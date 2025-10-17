@@ -1,0 +1,64 @@
+---
+title: Setting up MDX Blog Infrastructure
+subtitle: Building a flexible content system
+year: 2025
+date: 2025-10-17
+thumbnail: https://schultzdavidg-portfolio.s3.us-west-1.amazonaws.com/images/aq/aq_overview.png
+order: 1
+visible: true
+---
+
+# Setting up MDX Blog Infrastructure
+
+This post demonstrates the new blog infrastructure for your portfolio site.
+
+## Features
+
+The new blog system supports:
+
+- **MDX files** with full component support
+- **Frontmatter metadata** for titles, dates, and visibility
+- **Automatic routing** via Next.js App Router
+- **Table of contents** generation from headers
+- **Consistent styling** with the existing work sections
+
+## How it Works
+
+### File Structure
+
+Blog posts are stored in `/public/articles/blog/` as `.mdx` files. Each file needs frontmatter with:
+
+```yaml
+---
+title: Your Post Title
+subtitle: Brief description
+year: 2025
+date: 2025-10-17
+thumbnail: path/to/image.png
+order: 1  # Optional: lower numbers appear first
+visible: true  # Must be true to show in navigation
+---
+```
+
+### Routing
+
+The system automatically creates routes at `/blog/[slug]` where the slug matches the filename (without extension).
+
+### Components
+
+You can use React components directly in your MDX:
+
+<div className="p-4 bg-bg-secondary rounded-md">
+  <p className="text-tx-secondary italic">This is a custom styled component!</p>
+</div>
+
+## Next Steps
+
+With this infrastructure in place, you can now:
+
+1. Add new blog posts by creating `.mdx` files in `/public/articles/blog/`
+2. Use React components within your posts
+3. Control visibility and ordering via frontmatter
+4. Enjoy automatic table of contents generation
+
+Happy blogging! 🎉

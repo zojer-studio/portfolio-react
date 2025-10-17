@@ -120,10 +120,16 @@ export default function HomeTabsWithScroll({ articles, demos, defaultTab = 'work
               ))}
           </ul>
         </TabsContent>
-        <TabsContent value="blog" className="px-6 flex flex-col items-center max-w-[900px] m-0">
-          <div className="my-4 bg-bg-secondary rounded w-full p-4 flex flex-col items-center">
-            <p className="italic text-tx-secondary">Coming soon (to theaters near you)</p>
-          </div>
+        <TabsContent value="blog" className="flex flex-col m-0">
+          <ul className="grid grid-cols-1 gap-12 w-full p-4">
+            { articles
+              .filter(({ visible, path }) => visible && path.startsWith('/blog/'))
+              .map(({ title, subtitle, year, thumbnail, path }) => (
+                <Link key={path} className={clsx('w-full')} href={path}>
+                  <ArticleThumbnail title={title} subtitle={subtitle} thumbnail={thumbnail}/>
+                </Link>
+              ))}
+          </ul>
         </TabsContent>
         <TabsContent value="about" className="px-6 flex flex-col items-center max-w-[900px] m-0">
           <div className="my-4 rounded w-full p-4 flex flex-col gap-3 text-md">
