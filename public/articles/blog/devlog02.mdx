@@ -1,0 +1,65 @@
+---
+title: Building an Infinite Circular Feed [devlog.02]
+subtitle: Mar 9, 2024 • 4 min read
+year: 2024
+date: 2024-03-10
+thumbnail: https://schultzdavidg-portfolio.s3.us-west-1.amazonaws.com/images/blog/devlog02/hero.png
+order: null
+visible: true
+---
+
+<TitleSection />
+
+![image](https://schultzdavidg-portfolio.s3.us-west-1.amazonaws.com/images/blog/devlog02/hero.png)
+
+Over the last 8 weeks, my team (in UW’s IxD program) has been conceptualizing new ways to think about calendars in mixed reality.
+
+You can read about the overall concept we’ve explored in my post about [Managing your Position-in-Time](https://medium.com/@schultzdavidg/managing-your-position-in-time-78d1db921e7e)**.**
+
+But for this devlog, the main takeaway is that the current (grid-based) calendar works great for event management, and not-so-great for task management. Our goal is to explore new forms of the latter, emphasizing the connection between tasks and time.
+
+One of the big ideas we landed on is modeling a day after the circular form of a clock.
+
+You can see it in the gif below—there’s a sort of semi-circle, with a layer on top that spins. You can create a “task”, place it at a specific point in time, and watch it move with the rest of the timeline.
+
+<VideoPlayer
+    width="100%"
+    height="auto"
+    videoUrl="https://schultzdavidg-portfolio.s3.us-west-1.amazonaws.com/images/blog/devlog02/early-demo.gif"
+    gifUrl="https://schultzdavidg-portfolio.s3.us-west-1.amazonaws.com/images/blog/devlog02/early-demo.gif"
+/>
+
+Pretty cool, right? This itself involved a ton of work (and a few iterations):
+- Spatial Anchors (a headache and a half to wrap my head around), which allow the user to place the timeline anywhere in the scene + save its location across sessions.
+- Task creation uses a modified script* from Meta to cycle through colors/meshes on an object. When confirm is pressed, a new task prefab is instantiated with the desired settings (and the example object is hidden).**palm menu from Meta’s *[*PokeExamples*](https://developer.oculus.com/documentation/unity/unity-isdk-example-scenes/#pokeexamples)* scene.*
+- The spinnable layer, which uses a `GrabInteractable` + `OneGrabRotateTransformer` to rotate around an axis (without translating its position).
+- Snap positions for tasks, which use a `SnapInteractable`* to hold the position and rotation of a task prefab.**from Meta’s *[*SnapExamples*](https://developer.oculus.com/documentation/unity/unity-isdk-example-scenes/#snapexamples)* scene.*
+
+
+Huge shoutout to [Black Whale Studio](https://www.youtube.com/@blackwhalestudio) and [Valem](https://www.youtube.com/@ValemTutorials) for great tutorials, and the building blocks from Meta’s [All-in-one SDK](https://assetstore.unity.com/packages/tools/integration/meta-xr-all-in-one-sdk-269657).
+
+But let’s get to the meat of the issue.
+
+TLDR; The rotating surface should behave like an infinite feed. As the surface is rotated, objects should (1) disappear as they “move into” the gap. Conversely, objects should (2) appear as they “come out” of the gap. This is very complicated.
+
+![image](https://schultzdavidg-portfolio.s3.us-west-1.amazonaws.com/images/blog/devlog02/infinite-circle-diagram.png)
+
+First off, you might be wondering, “what the heck am I looking at?” Then, knowing this is supposed to be a calendar, you might ask: “what’s the range of time here?” Or, “why 3° and 36°?” Ignore all that for now.
+
+All you need to know is: as the ring spins clockwise, purple objects disappear into the gap, and green objects appear out from it. Vice versa when counter-clockwise. *Also, for now, the semi-circle represents a day.*
+
+Now, why is this difficult? Well.
+- We’re dealing with non-euclidean space here. Let’s say the ring spins clockwise, and a purple object crosses `3°` and disappears. What happens when it then crosses `36°`? If this was normal geometry, you would expect it to re-appear… but in our case, it shouldn’t.
+- Let’s say it spins clockwise, and a green object appears as it crosses `36°`. How does the system know to make it appear at that angle?
+- How are the objects stored on the timeline? What kind of data structure do they live in, is a List good enough?
+
+I have some thoughts on how to build it, but first I want to mention what I’ve tried:
+- Using a combination of mopscius’s [infinite-scroll-unity](https://github.com/mopsicus/infinite-scroll-unity?tab=readme-ov-file) code and Meta’s curved UI panel, I tried to use the position of visible objects on the canvas, and on each update have tasks follow. However, (1) I couldn’t get this working, and (2) I couldn’t figure out how to get the canvas’s interactable surface horizontal, while using the vertical curvature.
+- Instantiate an invisible collider at the gap, hoping I could make objects disappear on collision, but wasn’t able to get this to work either.
+
+I wanted to use existing code to speed up development, but after laying this all out I think a fully custom solution is needed. And hopefully not too difficult to implement.
+- Create a linear timeline and place objects at x=1.0, x=6.2, x=19.3, etc. Each x value represents a sec/min/hr/day/mo/year moment in time (e.g. 6:32:89 PM on Mar 9, 2024).
+- Select a range that represents `36°` to `3°`. Say, `327 units`(360° minus 33°), so that it’s easy to work with the angles.
+- Then, keep track of the range of x values that is currently visible, and show/hide whenever an object moves outside that range.
+
+Okay, well, off to attempting it!

@@ -69,9 +69,9 @@ interface TitleSectionProps {
   // Accept optional frontmatter props to avoid SSR issues
   title?: string
   subtitle?: string
-  date?: string
-  year?: string
-  published?: string
+  date?: string | Date
+  year?: string | number
+  published?: string | Date
   location?: string
 }
 
@@ -84,7 +84,22 @@ export function TitleSection(props: TitleSectionProps) {
   }
 
   // Use published, date, or year - whichever is available
-  const dateString = frontmatter.published || frontmatter.date || frontmatter.year
+  // Convert Date objects to strings to avoid React rendering errors
+  const getDateString = (value: any): string | undefined => {
+    if (!value) return undefined
+    if (value instanceof Date) {
+      return value.toLocaleDateString('en-US', { 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric' 
+      })
+    }
+    return String(value)
+  }
+
+  const dateString = getDateString(frontmatter.published) || 
+                    getDateString(frontmatter.date) || 
+                    getDateString(frontmatter.year)
 
   return (
     <section className="mb-4 scroll-mt-24" id="overview">
@@ -128,13 +143,25 @@ export function TitleSection(props: TitleSectionProps) {
   );
 }
 
+interface ImageStackProps {
+  children: React.ReactNode
+}
+
+export function ImageStack({ children }: ImageStackProps) {
+  return (
+    <div className="flex flex-col gap-2 my-4 [&_img]:my-0">
+      {children}
+    </div>
+  )
+}
 
 const MDXCustomComponents = {
   Highlight,
   Callout,
   Anchor,
   TitleSection,
-  VideoPlayer
+  VideoPlayer,
+  ImageStack
 }
 
 export default MDXCustomComponents

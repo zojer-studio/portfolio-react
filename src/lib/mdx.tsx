@@ -6,7 +6,7 @@ import { Markdown } from '@/components/markdown/Markdown'
 
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { Highlight, Callout, Anchor, TitleSection } from '@/components/markdown/MDXCustomComponents'
+import { Highlight, Callout, Anchor, TitleSection, ImageStack } from '@/components/markdown/MDXCustomComponents'
 import VideoPlayer from '@/components/VideoPlayer'
 import MarkdownConverter from '@/components/markdown/MarkdownConverter'
 import Image from 'next/image'
@@ -14,9 +14,9 @@ import Image from 'next/image'
 interface Frontmatter {
   title?: string
   subtitle?: string
-  date?: string
-  year?: string
-  published?: string
+  date?: string | Date
+  year?: string | number
+  published?: string | Date
   location?: string
   thumbnail?: string
   order?: number | string
@@ -75,6 +75,7 @@ const createComponents = (frontmatter?: Frontmatter) => ({
   Link,
   Image,
   MarkdownConverter,
+  ImageStack,
 })
 
 // Default components for backward compatibility
