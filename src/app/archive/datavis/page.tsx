@@ -21,6 +21,7 @@ export default function Datavis() {
   // const [tabClicked, setTabClicked] = useState(false);
 
   return (
+    <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
     <main className="md:col-span-8">
 
       <nav className="flex gap-1 font-mono text-xs sticky top-0 pt-16 bg-bg z-[10000]">
@@ -52,6 +53,7 @@ export default function Datavis() {
       </article>
       <ScrollButton />
     </main>
+    </div>
   )
 }
 

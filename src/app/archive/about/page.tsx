@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 
 export default function About() {
   return (
+    <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
     <main className="md:col-span-8">
             <div className="text-sm font-mono text-tx-primary flex gap-1 mb-4 p-1">
               <button className="hover:bg-bg-hover border-b-[1.5px] border-bd/0 pt-1.5 pb-[7px] px-1">
@@ -32,5 +33,6 @@ export default function About() {
                 </div>
             </div>
     </main>
+    </div>
   )
 }

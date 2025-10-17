@@ -16,7 +16,7 @@ export default async function Home() {
   const demos = await getAllDemos();
 
   return (
-    <>
+    <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
       <section className="md:col-span-4 flex flex-col gap-4 md:sticky md:top-0 md:py-16 self-start md:h-screen">
         <Image 
           src={'/images/star-sketch.png'}
@@ -41,7 +41,7 @@ export default async function Home() {
             <HomeTabsWithScroll articles={articles} demos={demos} />
           </StickyCard>
       </main>
-    </>
+    </div>
   )
 }
 

@@ -68,7 +68,7 @@ export default async function ArticlePage({ params }: PageProps) {
 
 
   return (
-    <>
+    <div className="flex flex-col md:flex-row gap-8 w-full">
       <Sidebar>
         <SidebarNav href={'/'} breadcrumb={'work'} page={slug}/>
         <ol className="bg-bg-card flex flex-col p-3 border rounded-md border-bd-secondary font-mono text-sm text-tx-primary space-y-1">
@@ -82,16 +82,17 @@ export default async function ArticlePage({ params }: PageProps) {
         </ol>
       </Sidebar>
       
-      <main className="md:col-span-8">
+      <main className="flex-1 min-w-0">
         <StickyCardMask />
         <StickyCard>
           {/* <StickyCardNav href="/" destination="work" page ={params.slug} className="sticky top-6" /> */}
-          <article className="max-w-4xl mx-auto px-8 py-8">
-            {renderedContent}
+          <article className="px-8 py-8">
+            <div className="max-w-4xl mx-auto prose-content">
+              {renderedContent}
+            </div>
           </article>
         </StickyCard>
       </main>
-    
-    </>
+    </div>
   )
 }

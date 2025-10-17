@@ -37,10 +37,11 @@ export default function MarkdownDemo() {
   }
 
   return (
-    <div className="md:col-start-3 md:col-span-8 flex flex-col mt-4">
-      <SidebarNav href={'/?tab=demos'} breadcrumb={'demos'} page={'markdown'}/>
-            
-      <main className="md:col-span-8">
+    <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+      <div className="md:col-start-3 md:col-span-8 flex flex-col mt-4">
+        <SidebarNav href={'/?tab=demos'} breadcrumb={'demos'} page={'markdown'}/>
+              
+        <main className="md:col-span-8">
         <StickyCardMask />
         <StickyCard>
           {/* <StickyCardNav href="/" destination="work" page ={params.slug} className="sticky top-6" /> */}
@@ -49,7 +50,7 @@ export default function MarkdownDemo() {
           </article>
         </StickyCard>
       </main>
-
+      </div>
     </div>
   )
 }

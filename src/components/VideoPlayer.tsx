@@ -37,7 +37,7 @@ const VideoPlayer: React.FunctionComponent<VideoPlayerProps> = (props) => {
   // Prevent hydration mismatch by not rendering until client-side
   if (!hasWindow) {
     return (
-      <div className="player-wrapper card my-12">
+      <div className="player-wrapper card my-12 video-player-wrapper" data-video-player>
         <div style={{ width: props.width, height: props.height, backgroundColor: '#f0f0f0', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           Loading...
         </div>
@@ -46,7 +46,7 @@ const VideoPlayer: React.FunctionComponent<VideoPlayerProps> = (props) => {
   }
 
   return (
-    <div className="player-wrapper card my-12">
+    <div className="player-wrapper card my-12 video-player-wrapper" data-video-player>
       {isDesktop ? (
         <ReactPlayer
           width={props.width}
