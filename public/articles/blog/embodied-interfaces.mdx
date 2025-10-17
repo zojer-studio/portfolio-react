@@ -1,0 +1,98 @@
+---
+title: "Laying the groundwork: Embodied interfaces in XR"
+subtitle: Apr 8, 2025 • 4 min read
+year: 2025
+date: 2025-04-08
+thumbnail: https://schultzdavidg-portfolio.s3.us-west-1.amazonaws.com/images/blog/embodied-interfaces/hero.jpg
+order: null
+visible: true
+---
+
+<TitleSection />
+
+Hey, it’s been a while!
+
+For the last 8 months or so, I’ve been working in blockchain. Didn’t expect that, but I was pleasantly surprised by how compelling decentralization is.
+
+Anyways, now that my design contract is wrapping up, I’m getting back into XR prototyping, etc. It’s been too long—and I decided that a blog post would be a great refresher 😄
+
+<VideoPlayer
+    width="100%"
+    height="auto"
+    videoUrl="https://schultzdavidg-portfolio.s3.us-west-1.amazonaws.com/images/blog/embodied-interfaces/table-tennis.mp4"
+    gifUrl="https://schultzdavidg-portfolio.s3.us-west-1.amazonaws.com/images/blog/embodied-interfaces/table-tennis.gif"
+/>
+
+**I got into VR ping pong a few days ago which has been insanely fun — and turns out to be a great place to gather user stories. But more on that later.**
+
+Last time I was in the headset, I was building my design capstone, [TerrariumXR](https://www.davidschultz.co/work/terrariumxr)—a mixed reality app that lets users terraform planets with their hands. I began with a question:
+
+> How might we design hand-centric gestures that are both comfortable and practical?
+
+See, I find that the most appealing value prop of XR is its ability to pull our everyday experiences *out* of our phones, and *in* to the world around us. The fact-of-the-matter is that we are mobile creatures. We *evolved* to interact with the world in 3-dimensions. Yet we sit in front of screens all day, incentivized to live a sedentary lifestyle, disconnected from our own bodies.
+
+If XR is to bring our bodies back into the equation, I think it starts with the hands.
+
+We’re not always going to have controllers, especially if we’re out in the real world. And before we can tackle solutions, we need to understand why it’s so hard to design for hand-centric interfaces. So that’s what this post is for!
+
+## The core problem: Without tangibility, there’s no precision
+
+Our hands are dexterous — very dexterous, compared to the rest of the animal kingdom. And I don’t need to convince you that muscle memory is a powerful thing.
+
+> Have you ever seen someone play Starcraft II? Frankly, it’s [absurd](https://youtu.be/zmYhX8fjmo8?si=CjzYXQaKtlASqhKE).
+
+But there’s a caveat. This dexterity? It evolved to handle physical tools. And (from what I can tell), the precision afforded by muscle memory is dependent on having a tangible reference point. Which doesn’t bode so well for us hand-centric, gestural designers, as many of the interactions our users expect out of digital experiences revolve around the ability to be precise.
+
+Here’s a great example: TerrariumXR! My capstone! It turns out, trying to precisely move an intangible node in free-air is really taxing. Grabbing the node? Great. Moving the node 1cm along a constrained axis in the air without a physical reference point? Not so great. While I think I uncovered something interesting with DHI (dual-handed interaction), the viability of the core interaction is quite clearly: a bust.
+
+<VideoPlayer
+    width="100%"
+    height="auto"
+    videoUrl="https://schultzdavidg-portfolio.s3.us-west-1.amazonaws.com/images/blog/embodied-interfaces/terrarium-xr-demo.mp4"
+    gifUrl="https://schultzdavidg-portfolio.s3.us-west-1.amazonaws.com/images/blog/embodied-interfaces/terrarium-xr-demo.gif"
+/>
+
+*TerrariumXR demo from May 2, 2024*
+
+## So how do we work around this?
+
+I think we need to fundamentally shift our perspective on how we think about interfaces. We’re coming from a world defined by the Personal Computer, where experiences are designed around precise inputs & outputs. Yes, it’s a powerful paradigm, but we’re breaking new ground here. And in my opinion, the sheer *dominance* of the GUI is suffocating our ability to craft experiences that truly synergize with body-centric input.
+
+Note: We’re still going to need precision. I mean, that’s a given, the world relies on it. But I believe the keys to precision are in eye-tracking and neural interfaces—both of which are outside my capacity to prototype with.
+
+## Embodied interfaces—i.e., embracing imprecision
+
+What I propose—(mostly to myself, right now)—is to explore experiences that are fundamentally built around imprecise input. And when I say imprecise, I should clarify that I’m talking about *spatial* precision. `xyz` coordinates and all.
+
+I’m not yet sure where this exploration will go. In all likelihood, I’ll realize that this is a dead-end. But I’m excited about this direction! Because I think it’ll bring me closer to understanding how we can collectively become more aware of the inner mechanisms of our bodies.
+
+And, there are three analogues that give me hope:
+
+#### The Magicians
+
+I’m reminded of *The Magicians*, a novel written by Lev Grossman. As you might expect, magic is real in this story. And in order to cast a spell, the magician must vocalize an archaic language while performing extremely complex, precise *gestures*.
+
+My takeaway? Yeah, gestures are hard. But just like we’ve trained our hands to type 130 WPM (that’s my flex for the day), I think we can get a lot more out of them in XR.
+
+#### RumbleVR
+
+A similar analogue is RumbleVR, which I’ve talked about before. You can *earthbend*. It’s fucking awesome.
+
+<VideoPlayer
+    width="100%"
+    height="auto"
+    videoUrl="https://schultzdavidg-portfolio.s3.us-west-1.amazonaws.com/images/blog/embodied-interfaces/rumble.mp4"
+    gifUrl="https://schultzdavidg-portfolio.s3.us-west-1.amazonaws.com/images/blog/embodied-interfaces/rumble.gif"
+/>
+
+*I yearn for the Rumble*
+
+#### Probabilistic Design
+
+Sometime last year, I attended a talk by Kay Hofmeester where he describes how the probabilistic nature of LLMs can be used to generate extremely bespoke user interfaces.
+
+I know I wrote about it before, but I’m forgetting if I posted it. Anyways, it sounds like he’s made progress on these ideas, here: [Generative UX](https://www.linkedin.com/posts/kayhofmeester_generative-ux-activity-7307886822385192960-D7DO/).
+
+My key takeaway here is that LLMs could be used to cozy up + personalize gestures to an individual’s body. Which then extends into a whole conversation about accessibility, etc. Lot’s more to unpack here, but I’ll save it for another time!
+
+Ciao!

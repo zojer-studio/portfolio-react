@@ -10,6 +10,7 @@ export type Article = {
   title: string
   subtitle: string
   year: string
+  date?: string | Date
   thumbnail: string
   // Smaller order shown first. Null order is last. Sorted alphabetically within
   // order.
@@ -75,6 +76,7 @@ export const getAllArticles = async (): Promise<Article[]> =>
         title: title,
         subtitle: data.subtitle,
         year: data.year,
+        date: data.date,
         thumbnail: data.thumbnail,
         content,
         order:
@@ -88,8 +90,27 @@ export const getAllArticles = async (): Promise<Article[]> =>
       }
     })
     
-    // Sort by order.
+    // Sort by different criteria based on article type
     .sort((a, b) => {
+      // For blog posts, sort by date (most recent first)
+      if (a.path.startsWith('/blog/') && b.path.startsWith('/blog/')) {
+        const aDate = a.date ? new Date(a.date).getTime() : 0
+        const bDate = b.date ? new Date(b.date).getTime() : 0
+        
+        // If both have dates, sort by date (newest first)
+        if (aDate && bDate) {
+          return bDate - aDate
+        }
+        
+        // If only one has a date, prioritize the one with a date
+        if (aDate && !bDate) return -1
+        if (!aDate && bDate) return 1
+        
+        // If neither has a date, sort alphabetically
+        return a.title.localeCompare(b.title)
+      }
+      
+      // For non-blog posts (work, etc.), use original order-based sorting
       const aOrder = a.order || Infinity
       const bOrder = b.order || Infinity
 

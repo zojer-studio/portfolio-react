@@ -1,14 +1,10 @@
 import { useState, useEffect } from 'react'
-import { renderMDXContent } from '@/lib/mdx'
+import { renderMDXContent, Frontmatter, AnchorData } from '@/lib/mdx'
 
 interface RenderedContent {
-  frontmatter: {
-    title?: string
-    subtitle?: string
-    year?: string
-  }
+  frontmatter: Frontmatter
   content: React.ReactElement
-  anchors: Array<{ id: string; title: string }>
+  anchors: AnchorData[]
 }
 
 export function useMDXContent(mdxPath: string) {

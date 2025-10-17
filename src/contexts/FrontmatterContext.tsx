@@ -5,9 +5,9 @@ import { createContext, useContext, ReactNode } from 'react'
 export interface FrontmatterData {
   title?: string
   subtitle?: string
-  date?: string
-  year?: string
-  published?: string
+  date?: string | Date
+  year?: string | number
+  published?: string | Date
   location?: string
   thumbnail?: string
   order?: number | string
