@@ -15,47 +15,60 @@ interface VideoPlayerProps {
 }
 
 const VideoPlayer: React.FunctionComponent<VideoPlayerProps> = (props) => {
-  const [isDesktop, setIsDesktop] = useState(true);
+  const [isDesktop, setIsDesktop] = useState(false);
+  const [hasWindow, setHasWindow] = useState(false);
 
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setHasWindow(true);
+      // Check if it's desktop based on screen width
+      setIsDesktop(window.innerWidth >= 768);
+      
+      // Optional: Add resize listener for responsive behavior
+      const handleResize = () => {
+        setIsDesktop(window.innerWidth >= 768);
+      };
+      
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }
+  }, []);
+
+  // Prevent hydration mismatch by not rendering until client-side
+  if (!hasWindow) {
+    return (
+      <div className="player-wrapper card my-12">
+        <div style={{ width: props.width, height: props.height, backgroundColor: '#f0f0f0', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          Loading...
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="player-wrapper card my-12">
-      {/* <ReactPlayer
-        width={props.width}
-        height={props.width}
-        url={props.videoUrl}
-        controls={false}
-        muted={true}
-        playing={true}
-        loop={true}
-        playsinline={true}
-        className={""}
-      /> */}
-
-      {isDesktop ?
-          (<ReactPlayer
-            width={props.width}
-            height={props.width}
-            url={props.videoUrl}
-            controls={false}
-            muted={true}
-            playing={true}
-            loop={true}
-            playsinline={true}
-            className={""}
-          />)
-            : 
-          (<Image
-            src={props.gifUrl}
-            alt=""
-            height={0}
-            width={0}
-            sizes="225vw"
-            style={{ width: '100%', height: 'auto' }}
-          />)
-      } 
-
-      <source src={props.videoUrl} type="video/mp4" />
+      {isDesktop ? (
+        <ReactPlayer
+          width={props.width}
+          height={props.height}
+          url={props.videoUrl}
+          controls={false}
+          muted={true}
+          playing={true}
+          loop={true}
+          playsinline={true}
+          className={""}
+        />
+      ) : (
+        <Image
+          src={props.gifUrl}
+          alt=""
+          height={0}
+          width={0}
+          sizes="225vw"
+          style={{ width: '100%', height: 'auto' }}
+        />
+      )}
     </div>
   );
 };
