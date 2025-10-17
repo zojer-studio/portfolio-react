@@ -5,7 +5,7 @@ export const demosConfig = {
     year: '2025',
     thumbnail: "https://schultzdavidg-portfolio.s3.us-west-1.amazonaws.com/images/markdown/markdown-cover-temp.jpg",
     order: null,
-    visible: true,
+    visible: false,
   },
   // 'portals': {
   //   title: 'Thinking with Portals',

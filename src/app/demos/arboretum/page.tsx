@@ -12,10 +12,9 @@ import { StickyCard, StickyCardMask } from "@/components/StickyCard";
 export default function Arboretum() {
 
   return (
-    <>
-      <ArboretumProvider>
-
-        <Sidebar className="md:col-span-5">
+    <ArboretumProvider>
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+        <Sidebar className="md:col-span-5 md:w-auto">
           <SidebarNav href={'/?tab=demos'} breadcrumb={'demos'} page={'arboretum'} className="top-6 shadow-sm"/>
             <OverviewFilterCard />
             <CurrentSelectionCard /> {/* This should only be visible if there is a currently selected grid cell. */}
@@ -29,8 +28,7 @@ export default function Arboretum() {
             <ArboretumVisualizer />
           </StickyCard>
         </main>
-
-      </ArboretumProvider>
-    </>
+      </div>
+    </ArboretumProvider>
   )
 }

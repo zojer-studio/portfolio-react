@@ -126,7 +126,7 @@ export default function HomeTabsWithScroll({ articles, demos, defaultTab = 'work
           </div>
         </TabsContent>
         <TabsContent value="about" className="px-6 flex flex-col items-center max-w-[900px] m-0">
-          <div className="my-4 bg-bg-secondary rounded w-full p-4 flex flex-col gap-3">
+          <div className="my-4 rounded w-full p-4 flex flex-col gap-3 text-md">
             <p className="text-tx-body">I design both interfaces and code.</p>
             <p className="text-tx-body">I consider myself, first-and-foremost, a designer. I graduated from the University of Washington&apos;s prestigious Interaction Design program in 2024, where I ultimately focused on sharpening my design process. This involved extensive user research&mdash;both academically, and professionally.</p>
             <p className="text-tx-body">But historically, I&apos;ve spent a lot of time developing. I have extensive experience in frontend technologies. My bread-and-butter is Next.js and TailwindCSS, which I have been practicing since 2020. Recently, I&apos;ve developed proficiency in Rust (backend) and Swift (iOS). I&apos;ve also worked with 3D technologies: namely, prototyping with extended reality (XR) in C# (Unity + Meta&apos;s XR SDK). My niche in XR focuses on hand/gestural interactions&mdash;i.e., designing for a future without traditional controllers.</p>

@@ -133,4 +133,35 @@ body {
   .corner-shadow {
     box-shadow: 0 0 12px 0 var(--box-shadow-04),0 0 0 48px var(--box-clip);
   }
+
+  /* Article content layout - constrain text but allow media to break out */
+  .prose-content {
+    /* Text content gets max-width but media breaks out */
+  }
+  
+  .prose-content > * {
+    /* Default: all content respects the max-width */
+    max-width: 56rem; /* 896px - same as max-w-4xl */
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .prose-content img,
+  .prose-content video,
+  .prose-content iframe,
+  .prose-content [data-video-player] {
+    /* Media elements extend to full article width */
+    max-width: none;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  
+  .prose-content .video-player-wrapper {
+    /* Ensure VideoPlayer component also breaks out */
+    max-width: none;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
 }
