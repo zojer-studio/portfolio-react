@@ -11,7 +11,7 @@ import VideoPlayer from '@/components/VideoPlayer'
 import MarkdownConverter from '@/components/markdown/MarkdownConverter'
 import Image from 'next/image'
 
-interface Frontmatter {
+export interface Frontmatter {
   title?: string
   subtitle?: string
   date?: string | Date
