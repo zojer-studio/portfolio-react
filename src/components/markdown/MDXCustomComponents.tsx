@@ -59,7 +59,7 @@ export function Anchor({ id, children, title, visible = true }: AnchorProps) {
   }
 
   return (
-    <div id={id} className="font-mono text-xs text-tx-body mb-5 scroll-mt-24 bg-bg-secondary px-2 py-2 rounded">
+    <div id={id} className="font-mono text-md text-tx-primary mb-5 scroll-mt-24 bg-bg-secondary px-2 py-2 rounded">
       # {children}
     </div>
   )
