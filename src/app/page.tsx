@@ -10,6 +10,8 @@ import { ThemeButtons } from '@/components/ThemeButtons'
 import HomeTabsWithScroll from '@/components/HomeTabsWithScroll'
 import { StickyCard, StickyCardMask, StickyCardNav } from '@/components/StickyCard'
 
+export const dynamic = 'force-dynamic'
+
 export default async function Home({
   searchParams,
 }: {
