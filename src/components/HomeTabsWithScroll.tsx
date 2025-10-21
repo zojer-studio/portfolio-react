@@ -99,7 +99,7 @@ export default function HomeTabsWithScroll({ articles, demos, defaultTab = 'work
       <StickyCardHeader className="sticky top-[-81px] z-0">
         {/* <h2 className="text-lg pl-4 pt-4">Stuff</h2> */}
         <div className="p-4 pb-0 ml-4 mt-4">
-          <p className="text-lg text-tx-body italic">everybody just wants to be seen</p>
+          <p className="text-lg text-tx-body italic">Everybody just wants to be seen</p>
           <Tooltip>
             <TooltipTrigger asChild>
               <CurrentTime className="text-sm font-mono text-tx-secondary" />
