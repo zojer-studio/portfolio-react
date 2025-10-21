@@ -33,7 +33,7 @@ export default function HomeTabsWithScroll({ articles, demos, defaultTab = 'work
 
   const router = useRouter()
   const searchParams = useSearchParams()
-  const tabFromUrl = searchParams.get('tab')
+  const tabFromUrl = searchParams?.get('tab') || undefined
 
   const [activeTab, setActiveTab] = useState<TabValue>(() => {
     // Priority: URL param > localStorage > defaultTab
