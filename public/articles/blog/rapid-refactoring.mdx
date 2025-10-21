@@ -1,0 +1,41 @@
+---
+title: Rapid refactoring is a superpower
+subtitle: Oct 20, 2025 • 3 min read
+year: 2025
+date: 2025-10-20
+thumbnail: https://schultzdavidg-portfolio.s3.us-west-1.amazonaws.com/images/blog/ai-muscle-memory/kairos-graphic.jpg
+order: null
+visible: true
+---
+
+<TitleSection />
+
+> its gotta proceed more like painting. sketch first, block out the composition, pencil in some form, see it, respond, add more detail, erase 50%, correct, stand back, come back in the morning, add in the underpainting on top of the drawing, totally hiding the drawing, block in the light and shade, finally add details.
+> [@nrose on Threads](https://www.threads.com/@nrose/post/DQDK-F1gBBX)
+
+![image](https://schultzdavidg-portfolio.s3.us-west-1.amazonaws.com/images/blog/ai-muscle-memory/kairos-graphic.jpg)
+
+I just spent the day refactoring my iOS app Kairos, and was reflecting on the raw speed at which I've built this thing.
+
+In just three months, I've built:
+- A backend in rust, which calculates the positions of planets in the sky + assembles them into a node graph (s/o to this [rust crate](https://crates.io/crates/swisseph))
+- FFI functions that allow iOS to interface with said backend's API
+- A swift frontend that renders calculated positions into a stylistically customizable wheel
+- Temperature throttling and chart caching, allowing for extremely efficient temporal skimming
+- Many, many refactors
+
+I'm finding that the speed at which I can build with Claude is so fast, it's closer to iterating in Figma than anything else. Only, I get to iterate in a live environment, and experience the app *as it is*—which means the feedback loop of my design process is outputting much higher fidelity UX.
+
+I'll write a post about tips and tricks later, but the major point of my reflection was that the killer feature of this development cycle is the ability to rapidly refactor.
+
+> Just build it. You can make it good later.
+
+Architecting has become an intuitive process. In this context, it doesn't make sense for me to plan features out ahead of time, because the reality is that I don't know how those features will integrate with each other *until I build it*. 
+
+So rather than spending my time in stasis, planning for a future that may not exist—I simply build a feature to the best of my ability, and then the next, and the next—and when it's time, I review how well they're integrated into the greater whole. I'll ask Claude, "please give me an overview of how data is passed between these components." And if the architecture looks funky, we'll go back and assess our options for a refactor.
+
+Two things are happening here. First, we're constantly breathing life into the codebase, so we don't end up with dead or outdated code. Second, and this is far more important: by refactoring, I develop a deeper understanding of how the code works. Deeper, even, than if I was writing each line myself.
+
+See, in my experience, it's easy to forget what you built if you don't touch it again. Code is *inherently* hard to read, and that hurdle is reason enough to not look at it; "there are more important things to do."
+
+But with AI, I don't need to use as much mental bandwidth. This means I can direct my energy to build a more holistic mental model, which for me proves to be more useful in terms of actual product development. 
