@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import clsx from 'clsx'
 import Link from 'next/link'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -18,7 +18,6 @@ interface TabsWithScrollProps {
   articles: any[];
   demos: any[];
   defaultTab?: string;
-  tabFromUrl?: string;
 }
 
 const VALID_TABS = ['work', 'demos', 'blog', 'about'] as const;
@@ -28,8 +27,14 @@ function isValidTab(tab: string | undefined): tab is TabValue {
   return tab !== undefined && VALID_TABS.includes(tab as TabValue);
 }
 
-export default function HomeTabsWithScroll({ articles, demos, defaultTab = 'work', tabFromUrl }: TabsWithScrollProps) {
+export default function HomeTabsWithScroll({ articles, demos, defaultTab = 'work' }: TabsWithScrollProps) {
+  console.log('=== CLIENT: Demos received ===', demos);
+  console.log('=== CLIENT: Demos count ===', demos.length);
+
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const tabFromUrl = searchParams.get('tab')
+
   const [activeTab, setActiveTab] = useState<TabValue>(() => {
     // Priority: URL param > localStorage > defaultTab
     if (isValidTab(tabFromUrl)) {
