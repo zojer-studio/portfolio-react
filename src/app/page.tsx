@@ -10,15 +10,23 @@ import { ThemeButtons } from '@/components/ThemeButtons'
 import HomeTabsWithScroll from '@/components/HomeTabsWithScroll'
 import { StickyCard, StickyCardMask, StickyCardNav } from '@/components/StickyCard'
 
-export default async function Home() {
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: Promise<{ tab?: string }>
+}) {
   // Fetch articles data directly in the component (server-side)
   const articles = await getAllArticles();
   const demos = await getAllDemos();
 
+  // Get the tab from URL search params
+  const params = await searchParams;
+  const tabFromUrl = params.tab;
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
       <section className="md:col-span-4 flex flex-col gap-4 md:sticky md:top-0 md:py-16 self-start md:h-screen">
-        <Image 
+        <Image
           src={'/images/star-sketch.png'}
           alt="logo"
           height={150}
@@ -38,7 +46,7 @@ export default async function Home() {
           <StickyCardMask />
           <StickyCard>
             {/* <StickyCardNav href="/?tab=demos" destination="demos" page ="page" /> */}
-            <HomeTabsWithScroll articles={articles} demos={demos} />
+            <HomeTabsWithScroll articles={articles} demos={demos} tabFromUrl={tabFromUrl} />
           </StickyCard>
       </main>
     </div>
