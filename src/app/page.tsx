@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
+import { Suspense } from 'react'
 import { Button } from '@/components/ui/button'
 // import '@/app/styles.css'
 import '@/lib/transform.css'
@@ -10,20 +11,13 @@ import { ThemeButtons } from '@/components/ThemeButtons'
 import HomeTabsWithScroll from '@/components/HomeTabsWithScroll'
 import { StickyCard, StickyCardMask, StickyCardNav } from '@/components/StickyCard'
 
-export const dynamic = 'force-dynamic'
-
-export default async function Home({
-  searchParams,
-}: {
-  searchParams: Promise<{ tab?: string }>
-}) {
+export default async function Home() {
   // Fetch articles data directly in the component (server-side)
   const articles = await getAllArticles();
   const demos = await getAllDemos();
 
-  // Get the tab from URL search params
-  const params = await searchParams;
-  const tabFromUrl = params.tab;
+  console.log('=== SERVER: Demos loaded ===', demos);
+  console.log('=== SERVER: Demos count ===', demos.length);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
@@ -48,7 +42,9 @@ export default async function Home({
           <StickyCardMask />
           <StickyCard>
             {/* <StickyCardNav href="/?tab=demos" destination="demos" page ="page" /> */}
-            <HomeTabsWithScroll articles={articles} demos={demos} tabFromUrl={tabFromUrl} />
+            <Suspense fallback={<div>Loading...</div>}>
+              <HomeTabsWithScroll articles={articles} demos={demos} />
+            </Suspense>
           </StickyCard>
       </main>
     </div>
