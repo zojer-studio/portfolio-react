@@ -20,7 +20,7 @@ export const demosConfig = {
     subtitle: 'Experimenting with d3.js',
     year: '2023',
     thumbnail: "https://schultzdavidg-portfolio.s3.us-west-1.amazonaws.com/images/arboretum/arb-demo-cover.jpg",
-    order: null,
+    order: 1,
     visible: true,
   },
 }
