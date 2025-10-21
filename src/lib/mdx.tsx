@@ -40,7 +40,7 @@ const createComponents = (frontmatter?: Frontmatter) => ({
     <pre className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg overflow-x-auto mb-4" {...props} />
   ),
   blockquote: (props: any) => (
-    <blockquote className="border-l-2 border-ic-brand bg-bg-disabled px-6 text-md italic text-tx-secondary pb-4" {...props} />
+    <blockquote className="border-l-2 border-ic-brand bg-bg-disabled px-6 text-md italic text-tx-secondary" {...props} />
   ),
   ul: (props: any) => <ul className="list-disc text-md pl-8 pb-4" {...props} />,
   ol: (props: any) => <ol className="list-decimal text-md pl-8 pb-4" {...props} />,
