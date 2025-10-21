@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import clsx from 'clsx'
 import Link from 'next/link'
@@ -18,28 +18,62 @@ interface TabsWithScrollProps {
   articles: any[];
   demos: any[];
   defaultTab?: string;
+  tabFromUrl?: string;
 }
 
-export default function HomeTabsWithScroll({ articles, demos, defaultTab = 'work' }: TabsWithScrollProps) {
-  const router = useRouter()
+const VALID_TABS = ['work', 'demos', 'blog', 'about'] as const;
+type TabValue = typeof VALID_TABS[number];
 
+function isValidTab(tab: string | undefined): tab is TabValue {
+  return tab !== undefined && VALID_TABS.includes(tab as TabValue);
+}
+
+export default function HomeTabsWithScroll({ articles, demos, defaultTab = 'work', tabFromUrl }: TabsWithScrollProps) {
+  const router = useRouter()
+  const [activeTab, setActiveTab] = useState<TabValue>(() => {
+    // Priority: URL param > localStorage > defaultTab
+    if (isValidTab(tabFromUrl)) {
+      return tabFromUrl;
+    }
+
+    // Check localStorage on client-side only
+    if (typeof window !== 'undefined') {
+      const savedTab = localStorage.getItem('activeTab');
+      if (isValidTab(savedTab)) {
+        return savedTab;
+      }
+    }
+
+    return defaultTab as TabValue;
+  })
+
+  // Update localStorage and URL when tab changes
   const handleTabValueChange = (value: string) => {
-    // Update URL - remove all search params for clean URLs
-    router.push('/', { scroll: false })
-    
+    if (!isValidTab(value)) return;
+
+    setActiveTab(value);
+
+    // Save to localStorage
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('activeTab', value);
+    }
+
+    // Update URL with the new tab
+    router.push(`/?tab=${value}`, { scroll: false })
+
     // Multiple approaches to ensure scrolling works regardless of content height
     setTimeout(() => {
       // Method 1: Direct element scrollTop (immediate)
       document.documentElement.scrollTop = 0
       document.body.scrollTop = 0
-      
+
       // Method 2: window.scrollTo with smooth behavior (for visual effect)
       window.scrollTo({
         top: 0,
         left: 0,
         behavior: 'smooth'
       })
-      
+
       // Method 3: Force scroll by trying to scroll to a specific element (fallback)
       const topElement = document.querySelector('body')
       if (topElement) {
@@ -48,17 +82,24 @@ export default function HomeTabsWithScroll({ articles, demos, defaultTab = 'work
     }, 100) // Increased delay to ensure tab content has fully rendered
   }
 
+  // Sync with URL changes (e.g., browser back/forward)
+  useEffect(() => {
+    if (isValidTab(tabFromUrl)) {
+      setActiveTab(tabFromUrl);
+    }
+  }, [tabFromUrl])
+
   return (
-    <Tabs 
-      id="tabs" 
-      defaultValue={defaultTab} 
+    <Tabs
+      id="tabs"
+      value={activeTab}
       className="mt-0 flex flex-col"
       onValueChange={handleTabValueChange}
     >
       <StickyCardHeader className="sticky top-[-81px] z-0">
         {/* <h2 className="text-lg pl-4 pt-4">Stuff</h2> */}
         <div className="p-4 pb-0 ml-4 mt-4">
-          <p className="text-lg text-tx-body italic">everybody just wants to be seen</p>
+          <p className="text-lg text-tx-body italic">Everybody just wants to be seen</p>
           <Tooltip>
             <TooltipTrigger asChild>
               <CurrentTime className="text-sm font-mono text-tx-secondary" />

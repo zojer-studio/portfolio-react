@@ -35,24 +35,51 @@ export const Sidebar: React.FC<SidebarProps> = ({ children, className }) => {
 export const SidebarNav: React.FC<SidebarNavProps> = ({ href, breadcrumb, page, className }) => {
   const pathname = usePathname();
   const [showTime, setShowTime] = useState(false); // State to toggle between breadcrumbs and time
+  const [homeHref, setHomeHref] = useState("/"); // Dynamic home link
+
+  // Determine which tab to navigate to based on current page
+  useEffect(() => {
+    if (!pathname || pathname === '/') {
+      setHomeHref('/');
+      return;
+    }
+
+    const pathSegments = pathname.split('/').filter(Boolean);
+    if (pathSegments.length > 0) {
+      const section = pathSegments[0]; // 'work', 'blog', 'demos', etc.
+
+      // Map the section to the appropriate tab
+      if (section === 'work' || section === 'blog' || section === 'demos') {
+        setHomeHref(`/?tab=${section}`);
+      } else {
+        // For other sections, check localStorage or default to '/'
+        if (typeof window !== 'undefined') {
+          const savedTab = localStorage.getItem('activeTab');
+          setHomeHref(savedTab ? `/?tab=${savedTab}` : '/');
+        } else {
+          setHomeHref('/');
+        }
+      }
+    }
+  }, [pathname]);
 
   // Build the display text based on toggle state
   const getDisplayText = () => {
     if (showTime) {
       return <CurrentTime />;
     }
-    
+
     // Show breadcrumbs based on current route
     if (!pathname || pathname === '/') {
       return <CurrentTime />; // On home page, default to time when showTime is false
     }
-    
+
     // For other pages, build breadcrumb from the pathname
     const pathSegments = pathname.split('/').filter(Boolean);
     if (pathSegments.length === 0) {
       return <CurrentTime />; // fallback for home
     }
-    
+
     // Format: "/ parent / current"
     if (pathSegments.length === 1) {
       return `/ ${pathSegments[0]}`;
@@ -73,7 +100,7 @@ export const SidebarNav: React.FC<SidebarNavProps> = ({ href, breadcrumb, page, 
 
   return (
       <nav className={cn("font-mono text-xs text-tx-button w-full flex gap-2 items-center bg-bg-button rounded-md p-2", className)}>
-        <Link href={"/"} className="flex items-center gap-2 rounded-sm pr hover:bg-bg-hover hover:text-tx-primary">
+        <Link href={homeHref} className="flex items-center gap-2 rounded-sm pr hover:bg-bg-hover hover:text-tx-primary">
           <IconButton variant="ghostalt" size="sm">
             <Image 
               src={'/star-sm-light.svg'}
