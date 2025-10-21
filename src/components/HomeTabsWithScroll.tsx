@@ -39,7 +39,7 @@ export default function HomeTabsWithScroll({ articles, demos, defaultTab = 'work
     // Check localStorage on client-side only
     if (typeof window !== 'undefined') {
       const savedTab = localStorage.getItem('activeTab');
-      if (isValidTab(savedTab)) {
+      if (savedTab && isValidTab(savedTab)) {
         return savedTab;
       }
     }
