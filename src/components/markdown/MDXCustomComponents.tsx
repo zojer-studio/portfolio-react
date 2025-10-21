@@ -3,8 +3,10 @@
 import { ReactNode } from 'react'
 import VideoPlayer from '@/components/VideoPlayer'
 import { Separator } from '@/components/ui/separator'
-import { Clock, Map } from 'iconoir-react'
+import { Clock, Map, ArrowRight } from 'iconoir-react'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
+import { Button } from '@/components/ui/button'
+import Link from 'next/link'
 
 interface HighlightProps {
   children: React.ReactNode
@@ -155,13 +157,32 @@ export function ImageStack({ children }: ImageStackProps) {
   )
 }
 
+interface DemoButtonProps {
+  href: string
+  children?: React.ReactNode
+}
+
+export function DemoButton({ href, children = 'Go to demo' }: DemoButtonProps) {
+  return (
+    <div className="my-6">
+      <Link href={href}>
+        <Button variant="brand" size="md" className="gap-2">
+          {children}
+          <ArrowRight width={16} height={16} />
+        </Button>
+      </Link>
+    </div>
+  )
+}
+
 const MDXCustomComponents = {
   Highlight,
   Callout,
   Anchor,
   TitleSection,
   VideoPlayer,
-  ImageStack
+  ImageStack,
+  DemoButton
 }
 
 export default MDXCustomComponents

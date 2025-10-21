@@ -6,7 +6,7 @@ import { Markdown } from '@/components/markdown/Markdown'
 
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { Highlight, Callout, Anchor, TitleSection, ImageStack } from '@/components/markdown/MDXCustomComponents'
+import { Highlight, Callout, Anchor, TitleSection, ImageStack, DemoButton } from '@/components/markdown/MDXCustomComponents'
 import VideoPlayer from '@/components/VideoPlayer'
 import MarkdownConverter from '@/components/markdown/MarkdownConverter'
 import Image from 'next/image'
@@ -76,6 +76,7 @@ const createComponents = (frontmatter?: Frontmatter) => ({
   Image,
   MarkdownConverter,
   ImageStack,
+  DemoButton,
 })
 
 // Default components for backward compatibility
